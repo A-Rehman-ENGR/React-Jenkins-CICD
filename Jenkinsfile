@@ -32,7 +32,7 @@ pipeline {
 
                 mkdir "C:\\JenkinsDeploy\\React-Jenkins-CICD"
 
-                xcopy /E /I /Y "dist\\*" "C:\\JenkinsDeploy\\React-Jenkins-CICD\\"
+                xcopy /E /I /Y "build\*" "C:\JenkinsDeploy\React-Jenkins-CICD\"
 
                 if errorlevel 2 exit /b 1
                 '''
