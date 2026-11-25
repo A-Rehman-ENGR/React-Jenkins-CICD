@@ -26,18 +26,22 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat '''
+                if not exist "build\\index.html" (
+                    echo Build output not found!
+                    exit /b 1
+                )
+
                 if exist "C:\\JenkinsDeploy\\React-Jenkins-CICD" (
                     rmdir /s /q "C:\\JenkinsDeploy\\React-Jenkins-CICD"
                 )
 
                 mkdir "C:\\JenkinsDeploy\\React-Jenkins-CICD"
 
-                xcopy /E /I /Y "build\*" "C:\JenkinsDeploy\React-Jenkins-CICD\"
+                xcopy /E /I /Y "build\\*" "C:\\JenkinsDeploy\\React-Jenkins-CICD\\"
 
-                if errorlevel 2 exit /b 1
+                if errorlevel 1 exit /b 1
                 '''
             }
         }
     }
 }
- 
